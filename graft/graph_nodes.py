@@ -45,7 +45,7 @@ def map_vertex_color(gt_graph, vertices, node_color):
         v_color = gt_graph.new_vertex_property("vector<double>")
 
         # Continuous values or too many unique values
-        if y.dtype in (torch.float16, torch.float32, torch.float64) or (len(set(y)) > 10):
+        if (y.dtype in (torch.float16, torch.float32, torch.float64)) or (len(set(y)) > 10):
             y_min, y_max = y.min().item(), y.max().item()
             colormap = mpl.cm.get_cmap('spring')
             for idx, value in enumerate(y):
