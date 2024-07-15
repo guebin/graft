@@ -209,7 +209,7 @@ def plot_directed_weighted(
     v_size, gt_graph = map_vertex_size(gt_graph, vertices, node_size)
 
     # 6. Set links.
-    e_weight, e_pen_width, gt_graph = set_links_dw(gt_graph, vertices, links, weights, edge_weight_text_format, edge_weight_width_scale)
+    e_weight, e_pen_width, gt_graph = set_links_weighted(gt_graph, vertices, links, weights, edge_weight_text_format, edge_weight_width_scale)
 
     # 7. Set draw_options.
     draw_options.setdefault('output_size', (150 + num_nodes, 150 + num_nodes))  # Set default output size if not provided in draw_options
