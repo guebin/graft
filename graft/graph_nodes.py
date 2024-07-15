@@ -42,10 +42,10 @@ def map_vertex_color(gt_graph, vertices, node_color):
         return None, gt_graph
     else: 
         y = torch.tensor(node_color)   
-        v_color = gt_graph.new_vertex_property("vector<double>")
+        #v_color = gt_graph.new_vertex_property("vector<double>")
 
         # Continuous values or too many unique values
-        if y.is_floating_point() or len(set(y)) > 10:
+        if y.is_floating_point():
             y_min, y_max = y.min().item(), y.max().item()
             colormap = mpl.cm.get_cmap('spring')
             for idx, value in enumerate(y):
