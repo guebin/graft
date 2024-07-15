@@ -176,6 +176,7 @@ def plot_directed_weighted(
         edge_weight_width=True,        
         edge_weight_text_format=".2f", 
         edge_weight_width_scale=1.0,
+        arrow_size_scale=1.0,
         layout_options=None, 
         draw_options=None,
     ):
