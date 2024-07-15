@@ -45,16 +45,14 @@ def map_vertex_color(gt_graph, vertices, node_color):
         v_color = gt_graph.new_vertex_property("vector<double>")
 
         # Continuous values or too many unique values
-        if (y.dtype in (torch.float16, torch.float32, torch.float64)) or (len(set(y)) > 10):
+        if y.is_floating_point() or len(set(y)) > 10:
             y_min, y_max = y.min().item(), y.max().item()
             colormap = mpl.cm.get_cmap('spring')
             for idx, value in enumerate(y):
                 normalized_value = (value.item() - y_min) / (y_max - y_min)  # Normalize between [0, 1]
                 rgba = list(colormap(normalized_value))  # Convert to RGBA color
                 v_color[vertices[idx]] = rgba
-
-        # Categorical or discrete values
-        else:
+        else: # Categorical or discrete values
             colors_dict = {
                 1: ['#F8766D'],
                 2: ['#F8766D', '#00BFC4'],
