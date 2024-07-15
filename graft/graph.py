@@ -173,11 +173,11 @@ def plot_directed_weighted(
         layout_options=None, 
         draw_options=None,
         node_color=None,
-        node_size=None,
-        edge_weight_text_format='{:.2f}', 
-        edge_weight_width_scale=1.0, 
-        edge_weight_text=True, 
-        edge_weight_width=True,
+        node_size=None,        
+        edge_weight_text=True,
+        edge_weight_width=True,        
+        edge_weight_text_format=".2f", 
+        edge_weight_width_scale=1.0
     ):
     """
     Visualize a directed and weighted graph.
