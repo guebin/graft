@@ -45,7 +45,7 @@ def map_vertex_color(gt_graph, vertices, node_color):
         v_color = gt_graph.new_vertex_property("vector<double>")
 
         # Continuous values or too many unique values
-        if y.is_floating_point() or len(y.unique()):
+        if y.is_floating_point() or len(y.unique())>10:
             print("asdf")
             y_min, y_max = y.min().item(), y.max().item()
             colormap = mpl.cm.get_cmap('spring')
