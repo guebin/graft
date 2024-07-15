@@ -46,7 +46,6 @@ def map_vertex_color(gt_graph, vertices, node_color):
 
         # Continuous values or too many unique values
         if y.is_floating_point() or len(y.unique())>10:
-            print("asdf")
             y_min, y_max = y.min().item(), y.max().item()
             colormap = mpl.cm.get_cmap('spring')
             for idx, value in enumerate(y):
@@ -54,7 +53,6 @@ def map_vertex_color(gt_graph, vertices, node_color):
                 rgba = list(colormap(normalized_value))  # Convert to RGBA color
                 v_color[vertices[idx]] = rgba
         else: # Categorical or discrete values
-            print("asdf2")
             colors_dict = {
                 1: ['#F8766D'],
                 2: ['#F8766D', '#00BFC4'],
