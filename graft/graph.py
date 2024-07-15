@@ -98,7 +98,7 @@ def plot_undirected_weighted(
     v_size, gt_graph = map_vertex_size(gt_graph, vertices, node_size)    
 
     # 6. Set links.
-    e_weight, e_pen_width, gt_graph = set_links_weighted(gt_graph,vertices,links,weights,edge_weight_text_format,edge_weight_width_scale)
+    e_weight, e_pen_width, e_arrow_size, gt_graph = set_links_weighted(gt_graph,vertices,links,weights,edge_weight_text_format,edge_weight_width_scale)
 
     # 7. Set draw_options.
     draw_options.setdefault('output_size', (150 + num_nodes, 150 + num_nodes)) # Set default output size if not provided in draw_options
@@ -170,14 +170,14 @@ def plot_directed_unweighted(
 def plot_directed_weighted(
         graph, 
         node_names=None, 
-        layout_options=None, 
-        draw_options=None,
         node_color=None,
         node_size=None,        
         edge_weight_text=True,
         edge_weight_width=True,        
         edge_weight_text_format=".2f", 
-        edge_weight_width_scale=1.0
+        edge_weight_width_scale=1.0,
+        layout_options=None, 
+        draw_options=None,
     ):
     """
     Visualize a directed and weighted graph.
@@ -209,8 +209,7 @@ def plot_directed_weighted(
     v_size, gt_graph = map_vertex_size(gt_graph, vertices, node_size)    
 
     # 6. Set links.
-    e_weight, e_pen_width, gt_graph = set_links_weighted(gt_graph,vertices,links,weights,edge_weight_text_format,edge_weight_width_scale)
-
+    e_weight, e_pen_width, e_arrow_size, gt_graph = set_links_weighted(gt_graph,vertices,links,weights,edge_weight_text_format,edge_weight_width_scale)
     # 7. Set draw_options.
     draw_options.setdefault('output_size', (150 + num_nodes, 150 + num_nodes)) # Set default output size if not provided in draw_options
     if node_color is not None:
@@ -221,6 +220,7 @@ def plot_directed_weighted(
         draw_options['edge_text'] = e_weight  # Set edge text property
     if edge_weight_width: 
         draw_options['edge_pen_width'] = e_pen_width  # Use edge weight to adjust edge pen width
+        draw_options['arrow_size'] = e_arrow_size  # Use edge weight to adjust edge pen width
 
     # 8. Perform graph layout using sfdf_layout and draw the graph using graph_draw.
     pos = gt.sfdp_layout(gt_graph, **layout_options)
