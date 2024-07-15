@@ -198,7 +198,7 @@ def plot_directed_weighted(
     draw_options = draw_options or {}
 
     # 2. extract_graph_components.
-    links, weights, num_nodes, x, y = extract_graph_components_udw(graph)
+    links, weights, num_nodes, x, y = extract_graph_components_dw(graph)
 
     # 3. Create a graph_tool graph.
     gt_graph = gt.Graph(directed=True)  # Undirected graph
