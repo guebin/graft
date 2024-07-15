@@ -62,7 +62,7 @@ def extract_graph_components_udw(graph):
 
     return links, weights, num_nodes, x, y
 
-    def extract_graph_components_duw(graph):
+def extract_graph_components_duw(graph):
     """
     Extract important components of a PyTorch Geometric graph. 
     This function is tailored for directed, unweighted graphs.
