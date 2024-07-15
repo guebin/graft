@@ -5,11 +5,11 @@ import matplotlib as mpl
 import torch
 import matplotlib.cm as cm
 
-def set_links_uw(gt_graph,links):
+def set_links_unweighted(gt_graph,links):
     gt_graph.add_edge_list(links.t().tolist())
     return gt_graph
 
-def set_links_w(gt_graph,vertices,links,weights,edge_weight_text_format,edge_weight_width_scale):
+def set_links_weighted(gt_graph,vertices,links,weights,edge_weight_text_format,edge_weight_width_scale):
     #vertices = {i: gt_graph.add_vertex() for i in range(num_nodes)}
     e_weight = gt_graph.new_edge_property("string")
     e_pen_width = gt_graph.new_edge_property("double")
