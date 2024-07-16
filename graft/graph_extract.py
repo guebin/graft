@@ -17,10 +17,10 @@ def extract_graph_components(graph):
     """
     # Extract edges (links) directly
     if graph.is_undirected():
-        links = graph.edge_index
-    else:
         unique_edges = set(tuple(sorted(edge)) for edge in graph.edge_index .t().tolist())
-        links = torch.tensor(list(unique_edges)).t().long()       
+        links = torch.tensor(list(unique_edges)).t().long()
+    else:
+        links = graph.edge_index      
     # Extract weights
     weights = torch.tensor(graph.edge_attr) if (hasattr(graph, 'edge_attr') and graph.edge_attr is not None) else torch.ones(links.size(1))
 
