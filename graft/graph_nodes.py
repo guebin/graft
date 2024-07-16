@@ -77,7 +77,7 @@ def map_vertex_color(gt_graph, vertices, node_colors):
                 9: ['#F8766D', '#D39200', '#93AA00', '#00BA38', '#00C19F', '#00B9E3', '#619CFF', '#DB72FB', '#FF61C3'],
                 10: ['#F8766D', '#A3A500', '#39B600', '#00BF7D', '#00BFC4', '#00B0F6', '#9590FF', '#E76BF3', '#FF62BC', '#D89000']
             }
-            ggplot_colors = colors_dict[len(set(y.tolist()))]
+            ggplot_colors = colors_dict[len(y.unique())]
 
             def hex_to_rgb_normalized(hex_color):
                 rgb = mpl.colors.hex2color(hex_color)  # Gives RGB values between 0 and 1
