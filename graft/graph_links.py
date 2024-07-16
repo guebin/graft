@@ -1,10 +1,3 @@
-import graph_tool.all as gt
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-import torch
-import matplotlib.cm as cm
-
 def set_links_unweighted(gt_graph,links):
     gt_graph.add_edge_list(links.t().tolist())
     return gt_graph
