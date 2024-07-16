@@ -129,6 +129,8 @@ def plot(
         draw_options['vertex_fill_color'] = v_color  # Set the vertex color based on y
     if node_size is not None:
         draw_options['vertex_size'] = v_size  # Set the vertex size based on node_size
+    if node_names is not None:
+        draw_options['vertex_text'] = v_text_prop        
     if edge_weight_text: 
         draw_options['edge_text'] = e_weight  # Set edge text property
     if edge_weight_width: 
@@ -136,5 +138,4 @@ def plot(
 
     # 8. Perform graph layout using sfdf_layout and draw the graph using graph_draw.
     draw_options['pos'] = gt.sfdp_layout(gt_graph, **layout_options)
-    draw_options['vertex_text'] = v_text_prop
     gt.graph_draw(gt_graph, **draw_options)
