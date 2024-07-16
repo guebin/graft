@@ -256,7 +256,7 @@ def plot(
     links, weights, num_nodes, x, y = _extract_graph_components(graph)
 
     # 3. Create a graph_tool graph.
-    if grah.is_undirected():
+    if graph.is_undirected():
         gt_graph = gt.Graph(directed=False)
     else:
         gt_graph = gt.Graph(directed=True)        
