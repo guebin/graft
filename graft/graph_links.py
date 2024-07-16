@@ -1,4 +1,4 @@
-def _set_links(
+def set_links(
         gt_graph,
         vertices,
         links,

@@ -1,6 +1,6 @@
 import torch
 
-def _extract_graph_components(graph):
+def extract_graph_components(graph):
     """
     Extract important components of a PyTorch Geometric graph. 
     This function is tailored for directed, weighted graphs.
