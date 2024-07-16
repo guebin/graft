@@ -29,10 +29,13 @@ def map_vertex_names(gt_graph, vertices, node_names):
         v_text_prop (graph_tool.VertexPropertyMap): Vertex property map with node names.
         gt_graph (graph_tool.Graph): Modified graph with vertex names.
     """
-    v_text_prop = gt_graph.new_vertex_property("string")
-    for v, name in zip(vertices, node_names):
-        v_text_prop[v] = name
-    return v_text_prop, gt_graph
+    if node_names is None:
+        return None, gt_graph
+    else: 
+        v_text = gt_graph.new_vertex_property("string")
+        for v, name in zip(vertices, node_names):
+            v_text[v] = name
+        return v_text, gt_graph
 
 def map_vertex_color(gt_graph, vertices, node_colors):
     """
