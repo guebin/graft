@@ -113,13 +113,7 @@ def plot(
     # 5. Map colors and sizes.
     v_color, gt_graph = map_vertex_color(gt_graph, vertices, node_colors)
     v_size, gt_graph = map_vertex_size(gt_graph, vertices, node_sizes)    
-    # Add properties to the graph
-    if v_text_prop:
-        gt_graph.vertex_properties["name"] = v_text_prop
-    if v_color:
-        gt_graph.vertex_properties["color"] = v_color
-    if v_size:
-        gt_graph.vertex_properties["size"] = v_size
+
     # 6. Set links.
     e_weight, e_pen_width, gt_graph = set_links(
         gt_graph,
@@ -130,8 +124,13 @@ def plot(
         edge_weight_width_scale
     )
     
-
-    # 7. Set draw_options.  
+    # 7. Set draw_options.
+    if node_colors is not None:
+        draw_options['vertex_fill_color'] = v_color  # Set the vertex color based on y
+    if node_sizes is not None:
+        draw_options['vertex_size'] = v_size  # Set the vertex size based on node_sizes
+    if node_names is not None:
+        draw_options['vertex_text'] = v_text_prop
     if edge_weight_text: 
         draw_options['edge_text'] = e_weight  # Set edge text property
     if edge_weight_width: 
