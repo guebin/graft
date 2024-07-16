@@ -6,7 +6,7 @@ import graph_tool.all as gt
 def plot(
         graph,
         node_names=None,
-        node_color=None,
+        node_colors=None,
         node_size=None,
         edge_weight_text=True,
         edge_weight_width=True,
@@ -21,7 +21,7 @@ def plot(
     Parameters:
         graph (torch_geometric.data.Data): Input graph in PyTorch Geometric format.
         node_names (list, optional): List of node names. Default is None.
-        node_color (list, optional): List of node colors. Default is None.
+        node_colors (list, optional): List of node colors. Default is None.
         node_size (list, optional): List of node sizes. Default is None.
         edge_weight_text (bool, optional): Whether to display edge weights as text. Default is True.
         edge_weight_width (bool, optional): Whether to adjust edge widths based on weights. Default is True.
@@ -111,7 +111,7 @@ def plot(
     vertices, v_text_prop, gt_graph = set_nodes(gt_graph, num_nodes, node_names)
 
     # 5. Map colors and sizes.
-    v_color, gt_graph = map_vertex_color(gt_graph, vertices, node_color)
+    v_color, gt_graph = map_vertex_color(gt_graph, vertices, node_colors)
     v_size, gt_graph = map_vertex_size(gt_graph, vertices, node_size)    
 
     # 6. Set links.
@@ -125,7 +125,7 @@ def plot(
     )
     
     # 7. Set draw_options.
-    if node_color is not None:
+    if node_colors is not None:
         draw_options['vertex_fill_color'] = v_color  # Set the vertex color based on y
     if node_size is not None:
         draw_options['vertex_size'] = v_size  # Set the vertex size based on node_size

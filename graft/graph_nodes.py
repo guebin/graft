@@ -21,7 +21,7 @@ def set_nodes(gt_graph, num_nodes, node_names=None):
     vertices = [gt_graph.add_vertex() for _ in range(num_nodes)]            
     return vertices, v_text_prop, gt_graph
 
-def map_vertex_color(gt_graph, vertices, node_color):
+def map_vertex_color(gt_graph, vertices, node_colors):
     """
     Map y values to vertex colors for a graph_tool graph.
 
@@ -34,10 +34,10 @@ def map_vertex_color(gt_graph, vertices, node_color):
         v_color (graph_tool.VertexPropertyMap): Vertex property map with colors.
     """
 
-    if node_color is None:
+    if node_colors is None:
         return None, gt_graph
     else: 
-        y = torch.tensor(node_color)   
+        y = torch.tensor(node_colors)   
         v_color = gt_graph.new_vertex_property("vector<double>")
 
         # Continuous values or too many unique values
