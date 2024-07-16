@@ -87,8 +87,7 @@ import matplotlib.cm as cm
 
 #     return links, num_nodes, x, y
 
-
-def extract_graph_components(graph):
+def _extract_graph_components(graph):
     """
     Extract important components of a PyTorch Geometric graph. 
     This function is tailored for directed, weighted graphs.
@@ -104,8 +103,11 @@ def extract_graph_components(graph):
         y (torch.Tensor, optional): Node labels or target values.
     """
     # Extract edges (links) directly
-    links = graph.edge_index
-
+    if graph.is_undirected():
+        links = graph.edge_index
+    else:
+        unique_edges = set(tuple(sorted(edge)) for edge in graph.edge_index .t().tolist())
+        links = torch.tensor(list(unique_edges)).t().long()       
     # Extract weights
     weights = torch.tensor(graph.edge_attr) if (hasattr(graph, 'edge_attr') and graph.edge_attr is not None) else torch.ones(links.size(1))
 

@@ -1,5 +1,6 @@
-# from .graph_nodes import * 
-# from .graph_links import * 
+from .graph_extract import *
+from .graph_nodes import * 
+from .graph_links import * 
 
 import graph_tool.all as gt
 import numpy as np
@@ -7,36 +8,6 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import torch
 import matplotlib.cm as cm
-
-def _extract_graph_components(graph):
-    """
-    Extract important components of a PyTorch Geometric graph. 
-    This function is tailored for directed, weighted graphs.
-
-    Parameters:
-        graph (torch_geometric.data.Data): Input graph in PyTorch Geometric format.
-
-    Returns:
-        links (torch.Tensor): Tensor representing graph edges.
-        weights (torch.Tensor): Tensor representing edge weights.
-        num_nodes (int): Number of nodes in the graph.
-        x (torch.Tensor, optional): Node feature matrix.
-        y (torch.Tensor, optional): Node labels or target values.
-    """
-    # Extract edges (links) directly
-    links = graph.edge_index
-
-    # Extract weights
-    weights = torch.tensor(graph.edge_attr) if (hasattr(graph, 'edge_attr') and graph.edge_attr is not None) else torch.ones(links.size(1))
-
-    # Extract number of nodes
-    num_nodes = graph.num_nodes
-
-    # Extract node features (x) and labels/targets (y)
-    x = torch.tensor(graph.x) if (hasattr(graph, 'x') and graph.x is not None) else None
-    y = torch.tensor(graph.y) if (hasattr(graph, 'y') and graph.y is not None) else None
-
-    return links, weights, num_nodes, x, y
 
 def _set_links(
         gt_graph,
@@ -252,7 +223,7 @@ def plot(
         default_draw_options.update(draw_options)
     draw_options = default_draw_options
 
-    # 2. extract_graph_components.
+    # Extract_graph_components.
     links, weights, num_nodes, x, y = _extract_graph_components(graph)
 
     # 3. Create a graph_tool graph.
