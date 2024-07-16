@@ -289,8 +289,9 @@ def plot(
         draw_options['edge_pen_width'] = e_pen_width  # Use edge weight to adjust edge pen width
 
     # 8. Perform graph layout using sfdf_layout and draw the graph using graph_draw.
-    pos = gt.sfdp_layout(gt_graph, **layout_options)
-    gt.graph_draw(gt_graph, pos=pos, vertex_text=v_text_prop, **draw_options)
+    draw_options['pos'] = gt.sfdp_layout(gt_graph, **layout_options)
+    draw_options['vertex_text'] = v_text_prop
+    gt.graph_draw(gt_graph, **draw_options)
 
 # def plot_undirected_unweighted(
 #         graph, 
