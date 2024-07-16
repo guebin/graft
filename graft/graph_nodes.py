@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import torch
 import matplotlib.cm as cm
-def set_nodes(gt_graph, num_nodes, node_names=None):
+
+def _set_nodes(gt_graph, num_nodes, node_names=None):
     """
     Set node names for a graph_tool graph if provided.
 
@@ -24,7 +25,7 @@ def set_nodes(gt_graph, num_nodes, node_names=None):
     vertices = [gt_graph.add_vertex() for _ in range(num_nodes)]            
     return vertices, v_text_prop, gt_graph
 
-def map_vertex_color(gt_graph, vertices, node_color):
+def _map_vertex_color(gt_graph, vertices, node_color):
     """
     Map y values to vertex colors for a graph_tool graph.
 
@@ -79,7 +80,7 @@ def map_vertex_color(gt_graph, vertices, node_color):
 
         return v_color, gt_graph
 
-def map_vertex_size(gt_graph, vertices, node_size):
+def _map_vertex_size(gt_graph, vertices, node_size):
     """
     Map y values to vertex sizes for a graph_tool graph.
 
