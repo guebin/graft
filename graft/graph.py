@@ -78,7 +78,7 @@ def plot(
         'vorder': None,
         'eorder': None,
         'nodesfirst': False,
-        'output_size': (800, 800),
+        'output_size': (300, 300),
         'fit_view': True,
         'fit_view_ink': None,
         'adjust_aspect': True,
