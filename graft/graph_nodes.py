@@ -81,7 +81,7 @@ def map_vertex_color(gt_graph, vertices, node_colors):
 
             def hex_to_rgb_normalized(hex_color):
                 rgb = mpl.colors.hex2color(hex_color)  # Gives RGB values between 0 and 1
-                return tuple([float(val) for val in rgb])
+                return [float(val) for val in rgb]
 
             ggplot_colors_rgb = [hex_to_rgb_normalized(color) for color in ggplot_colors]
             unique_y = torch.unique(y)
