@@ -1,4 +1,5 @@
 import matplotlib as mpl
+import torch
 
 def set_nodes(gt_graph, num_nodes, node_names=None):
     """
