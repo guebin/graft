@@ -261,7 +261,7 @@ def plot(
     if graph.is_undirected():
         gt_graph = gt.Graph(directed=False)
     else:
-        gt_graph = gt.Graph(directed=True)        
+        gt_graph = gt.Graph(directed=True)    
 
     # 4. Set nodes.
     vertices, v_text_prop, gt_graph = _set_nodes(gt_graph, num_nodes, node_names)
