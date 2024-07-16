@@ -1,25 +1,38 @@
 import matplotlib as mpl
 import torch
 
-def set_nodes(gt_graph, num_nodes, node_names=None):
+def set_nodes(gt_graph, num_nodes):
     """
-    Set node names for a graph_tool graph if provided.
+    Add nodes to a graph_tool graph.
 
     Parameters:
         gt_graph (graph_tool.Graph): Input graph in graph_tool format.
-        num_nodes (int): Number of nodes in the graph.
-        node_names (list, optional): List of node names. Default is None.
+        num_nodes (int): Number of nodes to add to the graph.
+
+    Returns:
+        vertices (list): List of vertices.
+        gt_graph (graph_tool.Graph): Modified graph with added nodes.
+    """
+    vertices = [gt_graph.add_vertex() for _ in range(num_nodes)]
+    return vertices, gt_graph
+
+def map_vertex_names(gt_graph, vertices, node_names):
+    """
+    Map node names to vertices in a graph_tool graph.
+
+    Parameters:
+        gt_graph (graph_tool.Graph): Input graph in graph_tool format.
+        vertices (list): List of vertices.
+        node_names (list): List of node names.
 
     Returns:
         v_text_prop (graph_tool.VertexPropertyMap): Vertex property map with node names.
+        gt_graph (graph_tool.Graph): Modified graph with vertex names.
     """
-    v_text_prop = None
-    if node_names:
-        v_text_prop = gt_graph.new_vertex_property("string")
-        for v, name in enumerate(node_names):
-            v_text_prop[v] = name
-    vertices = [gt_graph.add_vertex() for _ in range(num_nodes)]            
-    return vertices, v_text_prop, gt_graph
+    v_text_prop = gt_graph.new_vertex_property("string")
+    for v, name in zip(vertices, node_names):
+        v_text_prop[v] = name
+    return v_text_prop, gt_graph
 
 def map_vertex_color(gt_graph, vertices, node_colors):
     """

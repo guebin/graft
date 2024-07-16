@@ -108,9 +108,10 @@ def plot(
         gt_graph = gt.Graph(directed=True)    
 
     # 4. Set nodes.
-    vertices, v_text_prop, gt_graph = set_nodes(gt_graph, num_nodes, node_names)
+    vertices, gt_graph = set_nodes(gt_graph, num_nodes)
 
-    # 5. Map colors and sizes.
+    # 5. Map names, colors and sizes.
+    v_text, gt_graph = map_vertex_names(gt_graph, vertices, node_names)
     v_color, gt_graph = map_vertex_color(gt_graph, vertices, node_colors)
     v_size, gt_graph = map_vertex_size(gt_graph, vertices, node_sizes)    
 
@@ -130,7 +131,7 @@ def plot(
     if node_sizes is not None:
         draw_options['vertex_size'] = v_size  # Set the vertex size based on node_sizes
     if node_names is not None:
-        draw_options['vertex_text'] = v_text_prop
+        draw_options['vertex_text'] = v_text
     if edge_weight_text: 
         draw_options['edge_text'] = e_weight  # Set edge text property
     if edge_weight_width: 
