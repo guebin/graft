@@ -7,7 +7,7 @@ def plot(
         graph,
         node_names=None,
         node_colors=None,
-        node_size=None,
+        node_sizes=None,
         edge_weight_text=True,
         edge_weight_width=True,
         edge_weight_text_format=".2f",
@@ -22,7 +22,7 @@ def plot(
         graph (torch_geometric.data.Data): Input graph in PyTorch Geometric format.
         node_names (list, optional): List of node names. Default is None.
         node_colors (list, optional): List of node colors. Default is None.
-        node_size (list, optional): List of node sizes. Default is None.
+        node_sizes (list, optional): List of node sizes. Default is None.
         edge_weight_text (bool, optional): Whether to display edge weights as text. Default is True.
         edge_weight_width (bool, optional): Whether to adjust edge widths based on weights. Default is True.
         edge_weight_text_format (str, optional): Format string for edge weight text. Default is ".2f".
@@ -112,8 +112,14 @@ def plot(
 
     # 5. Map colors and sizes.
     v_color, gt_graph = map_vertex_color(gt_graph, vertices, node_colors)
-    v_size, gt_graph = map_vertex_size(gt_graph, vertices, node_size)    
-
+    v_size, gt_graph = map_vertex_size(gt_graph, vertices, node_sizes)    
+    # Add properties to the graph
+    if v_text_prop:
+        gt_graph.vertex_properties["name"] = v_text_prop
+    if v_color:
+        gt_graph.vertex_properties["color"] = v_color
+    if v_size:
+        gt_graph.vertex_properties["size"] = v_size
     # 6. Set links.
     e_weight, e_pen_width, gt_graph = set_links(
         gt_graph,
@@ -124,13 +130,8 @@ def plot(
         edge_weight_width_scale
     )
     
-    # 7. Set draw_options.
-    if node_colors is not None:
-        draw_options['vertex_fill_color'] = v_color  # Set the vertex color based on y
-    if node_size is not None:
-        draw_options['vertex_size'] = v_size  # Set the vertex size based on node_size
-    if node_names is not None:
-        draw_options['vertex_text'] = v_text_prop        
+
+    # 7. Set draw_options.  
     if edge_weight_text: 
         draw_options['edge_text'] = e_weight  # Set edge text property
     if edge_weight_width: 
