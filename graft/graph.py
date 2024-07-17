@@ -174,14 +174,14 @@ def plot(
     """
     gt_graph, draw_options = setup_graph_draw(
         graph,
-        node_names=None,
-        node_colors=None,
-        node_sizes=None,
-        edge_weight_text=True,
-        edge_weight_width=True,
-        edge_weight_text_format=".2f",
-        edge_weight_width_scale=1.0,
-        layout_options=None,
-        draw_options=None,
+        node_names=node_names,
+        node_colors=node_colors,
+        node_sizes=node_sizes,
+        edge_weight_text=edge_weight_text,
+        edge_weight_width=edge_weight_width,
+        edge_weight_text_format=edge_weight_text_format,
+        edge_weight_width_scale=edge_weight_width_scale,
+        layout_options=layout_options,
+        draw_options=draw_options,
     )
     gt.graph_draw(gt_graph, **draw_options)
