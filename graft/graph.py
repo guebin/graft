@@ -99,4 +99,4 @@ def plot(
         draw_options=draw_options,
     )
     # Draw the graph using graph_tool
-    gt.graph_draw(gt_graph, **draw_options)ㄴ
+    gt.graph_draw(gt_graph, **draw_options)
