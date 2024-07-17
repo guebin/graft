@@ -36,7 +36,7 @@ def map_vertex_names(gt_graph, vertices, node_names):
             v_text[v] = name
         return v_text, vertices, gt_graph
 
-def map_vertex_color(gt_graph, vertices, node_colors):
+def map_vertex_color(gt_graph, vertices, node_colors, alpha=1.0):
     """
     Map y values to vertex colors for a graph_tool graph.
 
@@ -61,7 +61,9 @@ def map_vertex_color(gt_graph, vertices, node_colors):
             colormap = mpl.cm.get_cmap('spring')
             for idx, value in enumerate(y):
                 normalized_value = (value - y_min) / (y_max - y_min)  # Normalize between [0, 1]
-                v_color[vertices[idx]] = list(colormap(normalized_value))  # Convert to RGBA color
+                rgba = list(colormap(normalized_value))  # Get RGBA color
+                rgba[-1] = alpha  # Set the alpha value
+                v_color[vertices[idx]] = rgba
         else: # Categorical or discrete values
             colors_dict = {
                 1: ['#F8766D'],
@@ -77,7 +79,7 @@ def map_vertex_color(gt_graph, vertices, node_colors):
             }
             ggplot_colors = colors_dict[len(set(y))]
 
-            def hex_to_rgb_normalized(hex_color,alpha=1.0):
+            def hex_to_rgb_normalized(hex_color,alpha=alpha):
                 rgb = mpl.colors.hex2color(hex_color)  # Gives RGB values between 0 and 1
                 rgba = list(rgb) + [alpha]
                 return [float(val) for val in rgba]
