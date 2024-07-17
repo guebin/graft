@@ -14,7 +14,7 @@ def map_vertex_names(gt_graph, draw_options, node_names):
         v_text_prop (graph_tool.VertexPropertyMap): Vertex property map with node names.
         gt_graph (graph_tool.Graph): Modified graph with vertex names.
     """
-    vertices = gt_graph.vertices()
+    vertices = [l for l in gt_graph.vertices()]
     if node_names is None:
         return gt_graph, draw_options
     else: 
