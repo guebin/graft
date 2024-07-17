@@ -173,7 +173,7 @@ def plot(
     Returns:
         None
     """
-    gt_graph, draw_options = setup_graph_draw(
+    setup_graph_draw(
         graph,
         node_names=None,
         node_colors=None,
@@ -184,5 +184,4 @@ def plot(
         edge_weight_width_scale=1.0,
         layout_options=None,
         draw_options=None,
-    )
-    gt.graph_draw(gt_graph, **draw_options)
+    );
