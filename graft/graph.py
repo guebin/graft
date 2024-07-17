@@ -107,8 +107,8 @@ def setup_graph_draw(
     gt_graph, draw_options = map_vertex_size(gt_graph, draw_options, node_sizes)
     gt_graph, draw_options = map_vertex_color(gt_graph, draw_options, node_colors)
     gt_graph, draw_options = map_vertex_names(gt_graph, draw_options, node_names)
-    gt_graph, draw_options = map_edge_weight_text(gt_graph, draw_options, node_names)
     gt_graph, draw_options = map_edge_pen_widths(gt_graph, draw_options, node_names)
+    #gt_graph, draw_options = map_edge_weight_text(gt_graph, draw_options, node_names)    
 
     # # 6. Set links.
     # e_weight, e_pen_width, gt_graph = set_links(
