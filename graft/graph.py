@@ -96,12 +96,12 @@ def setup_graph_draw(
         gt_graph = gt.Graph(directed=False)
         for _ in range(graph.num_nodes):
             gt_graph.add_vertex()
-        gt_graph.data = g
+        gt_graph.data = graph
     else:
         gt_graph = gt.Graph(directed=True)    
         for _ in range(graph.num_nodes):
             gt_graph.add_vertex() 
-        gt_graph.data = g
+        gt_graph.data = graph
 
     # 5. Map names, colors and sizes.
     gt_graph, draw_options = map_vertex_size(gt_graph, draw_options, node_sizes)

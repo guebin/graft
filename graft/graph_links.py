@@ -19,12 +19,13 @@ def map_edge_weight_text(
     """
     e_weight_text = gt_graph.new_edge_property("string")
     vertices = list(gt_graph.vertices())
+    graph = gt_graph.data
 
     # Extract edges (links) directly
-    if gt_graph.is_directed():
+    if graph.is_directed():
         links = graph.edge_index
     else:
-        unique_edges = set(tuple(sorted(edge)) for edge in graph.edge_index .t().tolist())
+        unique_edges = set(tuple(sorted(edge)) for edge in graph.edge_index.t().tolist())
         links = torch.tensor(list(unique_edges)).t().long()
               
     # Extract weights
@@ -57,8 +58,9 @@ def map_edge_pen_widths(
     """
     e_pen_width = gt_graph.new_edge_property("double")
     vertices = list(gt_graph.vertices())
+    graph = gt_graph.data
     # Extract edges (links) directly
-    if gt_graph.is_directed():
+    if graph.is_directed():
         links = graph.edge_index
     else:
         unique_edges = set(tuple(sorted(edge)) for edge in graph.edge_index .t().tolist())
