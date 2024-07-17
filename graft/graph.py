@@ -126,16 +126,16 @@ def plot(
     )
     
     # 7. Set draw_options.
-    if node_sizes is not None:
-        draw_options['vertex_size'] = v_size  # Set the vertex size based on node_sizes
     if node_names is not None:
         draw_options['vertex_text'] = v_text
     if node_colors is not None:
-        draw_options['vertex_fill_color'] = v_color  # Set the vertex color based on y
+        draw_options['vertex_fill_color'] = v_color  
+    if node_sizes is not None:
+        draw_options['vertex_size'] = v_size  
     if edge_weight_text: 
-        draw_options['edge_text'] = e_weight  # Set edge text property
+        draw_options['edge_text'] = e_weight  
     if edge_weight_width: 
-        draw_options['edge_pen_width'] = e_pen_width  # Use edge weight to adjust edge pen width
+        draw_options['edge_pen_width'] = e_pen_width  
 
     # 8. Perform graph layout using sfdf_layout and draw the graph using graph_draw.
     draw_options['pos'] = gt.sfdp_layout(gt_graph, **layout_options)
