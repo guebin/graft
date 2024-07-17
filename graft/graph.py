@@ -172,7 +172,7 @@ def plot(
     Returns:
         None
     """
-    setup_graph_draw(
+    gt_graph, draw_options = setup_graph_draw(
         graph,
         node_names=None,
         node_colors=None,
