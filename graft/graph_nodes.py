@@ -77,8 +77,9 @@ def map_vertex_color(gt_graph, vertices, node_colors):
             }
             ggplot_colors = colors_dict[len(set(y))]
 
-            def hex_to_rgb_normalized(hex_color):
+            def hex_to_rgb_normalized(hex_color,alpha=0.5):
                 rgb = mpl.colors.hex2color(hex_color)  # Gives RGB values between 0 and 1
+                rgba = list(rgb) + [alpha]
                 return [float(val) for val in rgb]
 
             ggplot_colors_rgb = [hex_to_rgb_normalized(color) for color in ggplot_colors]
