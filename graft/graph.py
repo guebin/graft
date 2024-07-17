@@ -140,3 +140,4 @@ def plot(
     # 8. Perform graph layout using sfdf_layout and draw the graph using graph_draw.
     draw_options['pos'] = gt.sfdp_layout(gt_graph, **layout_options)
     gt.graph_draw(gt_graph, **draw_options)
+    return draw_options
