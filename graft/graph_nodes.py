@@ -14,9 +14,9 @@ def set_nodes(gt_graph, num_nodes):
         gt_graph (graph_tool.Graph): Modified graph with added nodes.
     """
     vertices = [gt_graph.add_vertex() for _ in range(num_nodes)]
-    return vertices
+    return vertices, gt_graph
 
-def map_vertex_names(vertices, node_names):
+def map_vertex_names(gt_graph, vertices, node_names):
     """
     Map node names to vertices in a graph_tool graph.
 
@@ -30,14 +30,14 @@ def map_vertex_names(vertices, node_names):
         gt_graph (graph_tool.Graph): Modified graph with vertex names.
     """
     if node_names is None:
-        return None, gt_graph
+        return None, vertices, gt_graph
     else: 
         v_text = gt_graph.new_vertex_property("string")
         for v, name in zip(vertices, node_names):
             v_text[v] = name
-        return vertice, v_text 
+        return v_text, vertices, gt_graph
 
-def map_vertex_color(vertices, node_colors):
+def map_vertex_color(gt_graph, vertices, node_colors):
     """
     Map y values to vertex colors for a graph_tool graph.
 
@@ -51,7 +51,7 @@ def map_vertex_color(vertices, node_colors):
     """
 
     if node_colors is None:
-        return None, gt_graph
+        return None, vertices, gt_graph
     else: 
         y = torch.tensor(node_colors)   
         v_color = gt_graph.new_vertex_property("vector<double>")
@@ -90,9 +90,9 @@ def map_vertex_color(vertices, node_colors):
                 rgb = y_to_color[int(value.item())]
                 v_color[vertices[idx]] = rgb
 
-        return vertices, v_color
+        return v_color, vertices, gt_graph
 
-def map_vertex_size(vertices, node_sizes):
+def map_vertex_size(gt_graph, vertices, node_sizes):
     """
     Map y values to vertex sizes for a graph_tool graph.
 
@@ -106,7 +106,7 @@ def map_vertex_size(vertices, node_sizes):
     """
 
     if node_sizes is None:
-        return None, gt_graph
+        return None, vertices, gt_graph
     else: 
         y = torch.tensor(node_sizes)
         v_size = gt_graph.new_vertex_property("double")
@@ -118,4 +118,4 @@ def map_vertex_size(vertices, node_sizes):
             size = min_size + normalized_value * (max_size - min_size)  # Map to size range
             v_size[vertices[idx]] = size
 
-        return vertices, v_size
+        return v_size, vertices, gt_graph
