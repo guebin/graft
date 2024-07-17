@@ -35,7 +35,7 @@ def map_vertex_names(gt_graph, vertices, node_names):
         v_text = gt_graph.new_vertex_property("string")
         for v, name in zip(vertices, node_names):
             v_text[v] = name
-        return v_text, gt_graph
+        return vertice, v_text 
 
 def map_vertex_color(gt_graph, vertices, node_colors):
     """
@@ -90,7 +90,7 @@ def map_vertex_color(gt_graph, vertices, node_colors):
                 rgb = y_to_color[int(value.item())]
                 v_color[vertices[idx]] = rgb
 
-        return v_color, gt_graph
+        return vertices, v_color
 
 def map_vertex_size(gt_graph, vertices, node_size):
     """
@@ -118,4 +118,4 @@ def map_vertex_size(gt_graph, vertices, node_size):
             size = min_size + normalized_value * (max_size - min_size)  # Map to size range
             v_size[vertices[idx]] = size
 
-        return v_size, gt_graph
+        return vertices, v_size
