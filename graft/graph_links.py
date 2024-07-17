@@ -21,7 +21,7 @@ def map_edge_weight_text(
     vertices = list(gt_graph.vertices())
 
     # Extract edges (links) directly
-    if graph.is_directed():
+    if gt_graph.is_directed():
         links = graph.edge_index
     else:
         unique_edges = set(tuple(sorted(edge)) for edge in graph.edge_index .t().tolist())
@@ -58,7 +58,7 @@ def map_edge_pen_widths(
     e_pen_width = gt_graph.new_edge_property("double")
     vertices = list(gt_graph.vertices())
     # Extract edges (links) directly
-    if graph.is_directed():
+    if gt_graph.is_directed():
         links = graph.edge_index
     else:
         unique_edges = set(tuple(sorted(edge)) for edge in graph.edge_index .t().tolist())
