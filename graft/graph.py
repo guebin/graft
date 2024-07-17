@@ -1,4 +1,4 @@
-from .map_vertex import * 
+from .map_node import * 
 from .map_edge import * 
 import graph_tool.all as gt
     
@@ -57,9 +57,9 @@ def setup_graph_draw(
     gt_graph.data = graph
 
     # Map node properties (size, color, names) and edge properties (pen widths)
-    gt_graph, draw_options = map_vertex_size(gt_graph, draw_options, node_sizes)
-    gt_graph, draw_options = map_vertex_color(gt_graph, draw_options, node_colors)
-    gt_graph, draw_options = map_vertex_names(gt_graph, draw_options, node_names)
+    gt_graph, draw_options = map_node_names(gt_graph, draw_options, node_names)
+    gt_graph, draw_options = map_node_colors(gt_graph, draw_options, node_colors)
+    gt_graph, draw_options = map_node_sizes(gt_graph, draw_options, node_sizes)
     gt_graph, draw_options = map_edge_pen_widths(gt_graph, draw_options)
 
     # Set the layout positions using the specified layout options

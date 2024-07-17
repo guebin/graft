@@ -1,7 +1,7 @@
 import matplotlib as mpl
 import numpy as np
 
-def map_vertex_names(gt_graph, draw_options, node_names):
+def map_node_names(gt_graph, draw_options, node_names):
     """
     Map node names to vertices in a graph_tool graph.
 
@@ -23,7 +23,7 @@ def map_vertex_names(gt_graph, draw_options, node_names):
         draw_options['vertex_text'] = v_text
         return gt_graph, draw_options
     
-def map_vertex_color(gt_graph, draw_options, node_colors, alpha=1.0):
+def map_node_colors(gt_graph, draw_options, node_colors, alpha=1.0):
     """
     Map node colors to vertices in a graph_tool graph.
 
@@ -82,7 +82,7 @@ def map_vertex_color(gt_graph, draw_options, node_colors, alpha=1.0):
         draw_options['vertex_fill_color'] = v_color
         return gt_graph, draw_options
 
-def map_vertex_size(gt_graph, draw_options, node_sizes):
+def map_node_sizes(gt_graph, draw_options, node_sizes):
     """
     Map node sizes to vertices in a graph_tool graph.
 

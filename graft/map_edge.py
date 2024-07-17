@@ -1,6 +1,6 @@
 import torch 
 
-def map_edge_weight_text(
+def map_edge_weight_texts(
         gt_graph,
         draw_options,
         edge_weight_text_format=".2f"
