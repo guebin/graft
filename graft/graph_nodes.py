@@ -14,7 +14,7 @@ def set_nodes(gt_graph, num_nodes):
         gt_graph (graph_tool.Graph): Modified graph with added nodes.
     """
     vertices = [gt_graph.add_vertex() for _ in range(num_nodes)]
-    return vertices, gt_graph
+    return vertices
 
 def map_vertex_names(gt_graph, vertices, node_names):
     """
