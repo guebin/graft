@@ -1,5 +1,4 @@
 import matplotlib as mpl
-import torch
 
 def set_nodes(gt_graph, num_nodes):
     """
@@ -53,17 +52,17 @@ def map_vertex_color(gt_graph, vertices, node_colors):
     if node_colors is None:
         return None, vertices, gt_graph
     else: 
-        y = torch.tensor(node_colors)   
-        v_color = gt_graph.new_vertex_property("double")
+        y = list(node_colors)
+        v_color = gt_graph.new_vertex_property("vector<double>")
 
         # Continuous values or too many unique values
         if y.is_floating_point() or len(y.unique())>10:
-            y_min, y_max = y.min().item(), y.max().item()
+            y_min, y_max = min(y), max(y)
             colormap = mpl.cm.get_cmap('spring')
-            for idx, value in enumerate(y):
+            for color, value in enumerate(v_color,y):
                 normalized_value = (value.item() - y_min) / (y_max - y_min)  # Normalize between [0, 1]
                 rgba = list(colormap(normalized_value))  # Convert to RGBA color
-                v_color[vertices[idx]] = rgba
+                color = rgba
         else: # Categorical or discrete values
             colors_dict = {
                 1: ['#F8766D'],
@@ -77,15 +76,16 @@ def map_vertex_color(gt_graph, vertices, node_colors):
                 9: ['#F8766D', '#D39200', '#93AA00', '#00BA38', '#00C19F', '#00B9E3', '#619CFF', '#DB72FB', '#FF61C3'],
                 10: ['#F8766D', '#A3A500', '#39B600', '#00BF7D', '#00BFC4', '#00B0F6', '#9590FF', '#E76BF3', '#FF62BC', '#D89000']
             }
-            ggplot_colors = colors_dict[len(y.unique())]
+            ggplot_colors = colors_dict[len(set(y))]
 
             def hex_to_rgb_normalized(hex_color):
                 rgb = mpl.colors.hex2color(hex_color)  # Gives RGB values between 0 and 1
                 return [float(val) for val in rgb]
 
             ggplot_colors_rgb = [hex_to_rgb_normalized(color) for color in ggplot_colors]
-            unique_y = torch.unique(y)
-            y_to_color = {int(val.item()): ggplot_colors_rgb[i % len(ggplot_colors_rgb)] for i, val in enumerate(unique_y)}
+            unique_y = list(set(y))
+            unique_y.sort()
+            y_to_color = {int(val): ggplot_colors_rgb[val] for val in enumerate(unique_y)}
             for idx, value in enumerate(y):
                 rgb = y_to_color[int(value.item())]
                 v_color[vertices[idx]] = rgb
