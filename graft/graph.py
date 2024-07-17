@@ -97,10 +97,12 @@ def setup_graph_draw(
     # 3. Create a graph_tool graph.
     if graph.is_undirected():
         gt_graph = gt.Graph(directed=False)
-        gt_graph.add_vertex() for _ in range(num_nodes)
+        for _ in range(num_nodes):
+            gt_graph.add_vertex() 
     else:
         gt_graph = gt.Graph(directed=True)    
-        gt_graph.add_vertex() for _ in range(num_nodes)
+        for _ in range(num_nodes):
+            gt_graph.add_vertex() 
 
     # 5. Map names, colors and sizes.
     gt_graph, draw_options = map_vertex_size(gt_graph, draw_options, node_sizes)
