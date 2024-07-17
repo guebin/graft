@@ -1,4 +1,5 @@
 import matplotlib as mpl
+import numpy as np
 
 def set_nodes(gt_graph, num_nodes):
     """
