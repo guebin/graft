@@ -111,10 +111,10 @@ def plot(
     vertices, gt_graph = set_nodes(gt_graph, num_nodes)
 
     # 5. Map names, colors and sizes.
-    v_text, gt_graph = map_vertex_names(gt_graph, vertices, node_names)
+    v_size, gt_graph = map_vertex_size(gt_graph, vertices, node_sizes)
     v_color, gt_graph = map_vertex_color(gt_graph, vertices, node_colors)
-    v_size, gt_graph = map_vertex_size(gt_graph, vertices, node_sizes)    
-
+    v_text, gt_graph = map_vertex_names(gt_graph, vertices, node_names)
+    
     # 6. Set links.
     e_weight, e_pen_width, gt_graph = set_links(
         gt_graph,
