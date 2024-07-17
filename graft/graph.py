@@ -139,8 +139,7 @@ def setup_graph_draw(
         draw_options['edge_pen_width'] = e_pen_width  
 
     # 8. Perform graph layout using sfdf_layout and draw the graph using graph_draw.
-    draw_options['pos'] = gt.sfdp_layout(gt_graph, **layout_options)
-    gt.graph_draw(gt_graph, **draw_options)
+    draw_options['pos'] = gt.sfdp_layout(gt_graph, **layout_options)    
     return gt_graph, draw_options     
    
 def plot(
@@ -184,4 +183,5 @@ def plot(
         edge_weight_width_scale=1.0,
         layout_options=None,
         draw_options=None,
-    );
+    )
+    gt.graph_draw(gt_graph, **draw_options)
