@@ -7,42 +7,44 @@ def map_vertex_names(gt_graph, draw_options, node_names):
 
     Parameters:
         gt_graph (graph_tool.Graph): Input graph in graph_tool format.
-        vertices (list): List of vertices.
+        draw_options (dict): Dictionary of drawing options for the graph_draw function.
         node_names (list): List of node names.
 
     Returns:
-        v_text_prop (graph_tool.VertexPropertyMap): Vertex property map with node names.
         gt_graph (graph_tool.Graph): Modified graph with vertex names.
+        draw_options (dict): Updated drawing options with vertex names.
     """
     if node_names is None:
         return gt_graph, draw_options
-    else: 
+    else:
         v_text = gt_graph.new_vertex_property("string")
-        for idx,name in enumerate(node_names):
+        for idx, name in enumerate(node_names):
             v_text[idx] = name
         draw_options['vertex_text'] = v_text
         return gt_graph, draw_options
     
 def map_vertex_color(gt_graph, draw_options, node_colors, alpha=1.0):
     """
-    Map y values to vertex colors for a graph_tool graph.
+    Map node colors to vertices in a graph_tool graph.
 
     Parameters:
         gt_graph (graph_tool.Graph): Input graph in graph_tool format.
-        num_nodes (int): Number of nodes in the graph.
-        y (torch.Tensor): Tensor with values to map to colors.
+        draw_options (dict): Dictionary of drawing options for the graph_draw function.
+        node_colors (list): List of node colors.
+        alpha (float, optional): Alpha value for node colors. Default is 1.0.
 
     Returns:
-        v_color (graph_tool.VertexPropertyMap): Vertex property map with colors.
+        gt_graph (graph_tool.Graph): Modified graph with vertex colors.
+        draw_options (dict): Updated drawing options with vertex colors.
     """
     if node_colors is None:
         return gt_graph, draw_options
-    else: 
+    else:
         y = list(np.array(node_colors))
         v_color = gt_graph.new_vertex_property("vector<double>")
 
         # Continuous values or too many unique values
-        if any(isinstance(element, float) for element in y) or len(set(y))>10:
+        if any(isinstance(element, float) for element in y) or len(set(y)) > 10:
             y_min, y_max = min(y), max(y)
             colormap = mpl.cm.get_cmap('spring')
             for idx, value in enumerate(y):
@@ -50,7 +52,7 @@ def map_vertex_color(gt_graph, draw_options, node_colors, alpha=1.0):
                 rgba = list(colormap(normalized_value))  # Get RGBA color
                 rgba[-1] = alpha  # Set the alpha value
                 v_color[idx] = rgba
-        else: # Categorical or discrete values
+        else:  # Categorical or discrete values
             colors_dict = {
                 1: ['#F8766D'],
                 2: ['#F8766D', '#00BFC4'],
@@ -65,7 +67,7 @@ def map_vertex_color(gt_graph, draw_options, node_colors, alpha=1.0):
             }
             ggplot_colors = colors_dict[len(set(y))]
 
-            def hex_to_rgb_normalized(hex_color,alpha=alpha):
+            def hex_to_rgb_normalized(hex_color, alpha=alpha):
                 rgb = mpl.colors.hex2color(hex_color)  # Gives RGB values between 0 and 1
                 rgba = list(rgb) + [alpha]
                 return [float(val) for val in rgba]
@@ -82,19 +84,20 @@ def map_vertex_color(gt_graph, draw_options, node_colors, alpha=1.0):
 
 def map_vertex_size(gt_graph, draw_options, node_sizes):
     """
-    Map y values to vertex sizes for a graph_tool graph.
+    Map node sizes to vertices in a graph_tool graph.
 
     Parameters:
         gt_graph (graph_tool.Graph): Input graph in graph_tool format.
-        vertices (list): List of vertex indices.
-        node_size (torch.Tensor): Tensor with values to map to sizes.
+        draw_options (dict): Dictionary of drawing options for the graph_draw function.
+        node_sizes (list): List of node sizes.
 
     Returns:
-        v_size (graph_tool.VertexPropertyMap): Vertex property map with sizes.
+        gt_graph (graph_tool.Graph): Modified graph with vertex sizes.
+        draw_options (dict): Updated drawing options with vertex sizes.
     """
     if node_sizes is None:
         return gt_graph, draw_options
-    else: 
+    else:
         y = list(np.array(node_sizes))
         v_size = gt_graph.new_vertex_property("double")
 
@@ -104,5 +107,5 @@ def map_vertex_size(gt_graph, draw_options, node_sizes):
             normalized_value = (value - y_min) / (y_max - y_min)  # Normalize between [0, 1]
             size = min_size + normalized_value * (max_size - min_size)  # Map to size range
             v_size[idx] = size
-        draw_options['vertex_size'] = v_size  
+        draw_options['vertex_size'] = v_size
         return gt_graph, draw_options
