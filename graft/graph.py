@@ -108,7 +108,7 @@ def plot(
         gt_graph = gt.Graph(directed=True)    
 
     # 4. Set nodes.
-    vertices, gt_graph = set_nodes(gt_graph, num_nodes)
+    vertices = set_nodes(gt_graph, num_nodes)
 
     # 5. Map names, colors and sizes.
     vertices, v_size = map_vertex_size(vertices, node_sizes)
