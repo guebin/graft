@@ -59,10 +59,9 @@ def map_vertex_color(gt_graph, vertices, node_colors):
         if any(isinstance(element, float) for element in y) or len(set(y))>10:
             y_min, y_max = min(y), max(y)
             colormap = mpl.cm.get_cmap('spring')
-            for color, value in enumerate(v_color,y):
-                normalized_value = (value.item() - y_min) / (y_max - y_min)  # Normalize between [0, 1]
-                rgba = list(colormap(normalized_value))  # Convert to RGBA color
-                color = rgba
+            for idx, value in enumerate(y):
+                normalized_value = (value - y_min) / (y_max - y_min)  # Normalize between [0, 1]
+                v_color[vertices[idx]] = list(colormap(normalized_value))  # Convert to RGBA color
         else: # Categorical or discrete values
             colors_dict = {
                 1: ['#F8766D'],
@@ -87,7 +86,7 @@ def map_vertex_color(gt_graph, vertices, node_colors):
             unique_y.sort()
             y_to_color = {int(val): ggplot_colors_rgb[val] for val in enumerate(unique_y)}
             for idx, value in enumerate(y):
-                rgb = y_to_color[int(value.item())]
+                rgb = y_to_color[int(value)]
                 v_color[vertices[idx]] = rgb
 
         return v_color, vertices, gt_graph
