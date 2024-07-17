@@ -3,7 +3,7 @@ from .graph_nodes import *
 from .graph_links import * 
 import graph_tool.all as gt
     
-def plot(
+def setup_graph_draw(
         graph,
         node_names=None,
         node_colors=None,
@@ -31,7 +31,8 @@ def plot(
         draw_options (dict, optional): Dictionary of drawing options for the graph drawing. Default is None.
 
     Returns:
-        None
+        gt_graph (graph_tool.Graph): Prepared graph_tool graph.
+        draw_options (dict): Options for the graph_draw function.
     """
     # Default layout options
     default_layout_options = {
@@ -140,4 +141,48 @@ def plot(
     # 8. Perform graph layout using sfdf_layout and draw the graph using graph_draw.
     draw_options['pos'] = gt.sfdp_layout(gt_graph, **layout_options)
     gt.graph_draw(gt_graph, **draw_options)
-    return gt_graph, draw_options
+    return gt_graph, draw_options     
+   
+def plot(
+        graph,
+        node_names=None,
+        node_colors=None,
+        node_sizes=None,
+        edge_weight_text=True,
+        edge_weight_width=True,
+        edge_weight_text_format=".2f",
+        edge_weight_width_scale=1.0,
+        layout_options=None,
+        draw_options=None,
+    ):
+    """
+    Visualize a directed and weighted graph.
+
+    Parameters:
+        graph (torch_geometric.data.Data): Input graph in PyTorch Geometric format.
+        node_names (list, optional): List of node names. Default is None.
+        node_colors (list, optional): List of node colors. Default is None.
+        node_sizes (list, optional): List of node sizes. Default is None.
+        edge_weight_text (bool, optional): Whether to display edge weights as text. Default is True.
+        edge_weight_width (bool, optional): Whether to adjust edge widths based on weights. Default is True.
+        edge_weight_text_format (str, optional): Format string for edge weight text. Default is ".2f".
+        edge_weight_width_scale (float, optional): Scale factor for edge width based on weights. Default is 1.0.
+        layout_options (dict, optional): Dictionary of layout options for the layout algorithm. Default is None.
+        draw_options (dict, optional): Dictionary of drawing options for the graph drawing. Default is None.
+
+    Returns:
+        None
+    """
+    gt_graph, draw_options = setup_graph_draw(
+        graph,
+        node_names=None,
+        node_colors=None,
+        node_sizes=None,
+        edge_weight_text=True,
+        edge_weight_width=True,
+        edge_weight_text_format=".2f",
+        edge_weight_width_scale=1.0,
+        layout_options=None,
+        draw_options=None,
+    )
+    gt.graph_draw(gt_graph, **draw_options)
