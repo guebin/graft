@@ -115,7 +115,7 @@ def setup_graph_draw(
         links,
         weights,
         edge_weight_text_format='.2f',
-        edge_weight_width_scale=1.0,
+        edge_weight_width_scale=5.0,
     )
     
     # 7. Set draw_options.
@@ -126,7 +126,7 @@ def setup_graph_draw(
     if node_sizes is not None:
         draw_options['vertex_size'] = v_size  
     if hasattr(graph, 'edge_attr') and graph.edge_attr is not None:
-        draw_options['edge_text'] = e_weight  
+        draw_options['edge_text'] = e_weight
         draw_options['edge_pen_width'] = e_pen_width  
 
     # 8. Perform graph layout using sfdf_layout and draw the graph using graph_draw.
