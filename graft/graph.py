@@ -99,12 +99,6 @@ def setup_graph_draw(
         gt_graph = gt.Graph(directed=False)
     else:
         gt_graph = gt.Graph(directed=True)    
-    if hasattr(graph, 'edge_attr') and graph.edge_attr is not None:
-        edge_weight_text=True,
-        edge_weight_width=True
-    else:
-        edge_weight_text=False,
-        edge_weight_width=False,
 
     # 4. Set nodes.
     vertices, gt_graph = set_nodes(gt_graph, num_nodes)
@@ -131,9 +125,8 @@ def setup_graph_draw(
         draw_options['vertex_fill_color'] = v_color  
     if node_sizes is not None:
         draw_options['vertex_size'] = v_size  
-    if edge_weight_text: 
+    if hasattr(graph, 'edge_attr') and graph.edge_attr is not None:
         draw_options['edge_text'] = e_weight  
-    if edge_weight_width: 
         draw_options['edge_pen_width'] = e_pen_width  
 
     # 8. Perform graph layout using sfdf_layout and draw the graph using graph_draw.
