@@ -8,10 +8,6 @@ def setup_graph_draw(
         node_names=None,
         node_colors=None,
         node_sizes=None,
-        edge_weight_text=True,
-        edge_weight_width=True,
-        edge_weight_text_format=".2f",
-        edge_weight_width_scale=1.0,
         layout_options=None,
         draw_options=None,
     ):
@@ -107,6 +103,12 @@ def setup_graph_draw(
         gt_graph = gt.Graph(directed=False)
     else:
         gt_graph = gt.Graph(directed=True)    
+    if hasattr(graph, 'edge_attr') and graph.edge_attr is not None:
+        edge_weight_text=True,
+        edge_weight_width=True
+    else:
+        edge_weight_text=False,
+        edge_weight_width=False,
 
     # 4. Set nodes.
     vertices, gt_graph = set_nodes(gt_graph, num_nodes)
@@ -122,8 +124,8 @@ def setup_graph_draw(
         vertices,
         links,
         weights,
-        edge_weight_text_format,
-        edge_weight_width_scale
+        edge_weight_text_format='.2f',
+        edge_weight_width_scale=1.0,
     )
     
     # 7. Set draw_options.
