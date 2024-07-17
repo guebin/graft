@@ -1,3 +1,5 @@
+import torch 
+
 def map_edge_weight_text(
         gt_graph,
         draw_options,
