@@ -52,7 +52,7 @@ def map_vertex_color(gt_graph, vertices, node_colors, alpha=1.0):
     if node_colors is None:
         return None, vertices, gt_graph
     else: 
-        y = list(node_colors)
+        y = list(np.array(node_colors))
         v_color = gt_graph.new_vertex_property("vector<double>")
 
         # Continuous values or too many unique values
@@ -110,7 +110,7 @@ def map_vertex_size(gt_graph, vertices, node_sizes):
     if node_sizes is None:
         return None, vertices, gt_graph
     else: 
-        y = list(node_sizes)
+        y = list(np.array(node_sizes))
         v_size = gt_graph.new_vertex_property("double")
 
         y_min, y_max = min(y), max(y)
