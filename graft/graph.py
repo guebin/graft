@@ -97,37 +97,36 @@ def setup_graph_draw(
     # 3. Create a graph_tool graph.
     if graph.is_undirected():
         gt_graph = gt.Graph(directed=False)
+        gt_graph.add_vertex() for _ in range(num_nodes)
     else:
         gt_graph = gt.Graph(directed=True)    
-
-    # 4. Set nodes.
-    vertices, gt_graph = set_nodes(gt_graph, num_nodes)
+        gt_graph.add_vertex() for _ in range(num_nodes)
 
     # 5. Map names, colors and sizes.
-    v_size, vertices, gt_graph = map_vertex_size(gt_graph, vertices, node_sizes)
-    v_color, vertices, gt_graph = map_vertex_color(gt_graph, vertices, node_colors)
-    v_text, vertices, gt_graph = map_vertex_names(gt_graph, vertices, node_names)
+    gt_graph, draw_options = map_vertex_size(gt_graph, draw_options, node_sizes)
+    gt_graph, draw_options = map_vertex_color(gt_graph, draw_options, node_colors)
+    gt_graph, draw_options = map_vertex_names(gt_graph, draw_options, node_names)
 
-    # 6. Set links.
-    e_weight, e_pen_width, gt_graph = set_links(
-        gt_graph,
-        vertices,
-        links,
-        weights,
-        edge_weight_text_format='.2f',
-        edge_weight_width_scale=5.0,
-    )
+    # # 6. Set links.
+    # e_weight, e_pen_width, gt_graph = set_links(
+    #     gt_graph,
+    #     vertices,
+    #     links,
+    #     weights,
+    #     edge_weight_text_format='.2f',
+    #     edge_weight_width_scale=5.0,
+    # )
     
-    # 7. Set draw_options.
-    if node_names is not None:
-        draw_options['vertex_text'] = v_text
-    if node_colors is not None:
-        draw_options['vertex_fill_color'] = v_color  
-    if node_sizes is not None:
-        draw_options['vertex_size'] = v_size  
-    if hasattr(graph, 'edge_attr') and graph.edge_attr is not None:
-        draw_options['edge_text'] = e_weight
-        draw_options['edge_pen_width'] = e_pen_width  
+    # # 7. Set draw_options.
+    # if node_names is not None:
+    #     draw_options['vertex_text'] = v_text
+    # if node_colors is not None:
+    #     draw_options['vertex_fill_color'] = v_color  
+    # if node_sizes is not None:
+    #     draw_options['vertex_size'] = v_size  
+    # if hasattr(graph, 'edge_attr') and graph.edge_attr is not None:
+    #     draw_options['edge_text'] = e_weight
+    #     draw_options['edge_pen_width'] = e_pen_width  
 
     # 8. Perform graph layout using sfdf_layout and draw the graph using graph_draw.
     draw_options['pos'] = gt.sfdp_layout(gt_graph, **layout_options)    

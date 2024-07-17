@@ -1,22 +1,7 @@
 import matplotlib as mpl
 import numpy as np
 
-def set_nodes(gt_graph, num_nodes):
-    """
-    Add nodes to a graph_tool graph.
-
-    Parameters:
-        gt_graph (graph_tool.Graph): Input graph in graph_tool format.
-        num_nodes (int): Number of nodes to add to the graph.
-
-    Returns:
-        vertices (list): List of vertices.
-        gt_graph (graph_tool.Graph): Modified graph with added nodes.
-    """
-    vertices = [gt_graph.add_vertex() for _ in range(num_nodes)]
-    return vertices, gt_graph
-
-def map_vertex_names(gt_graph, vertices, node_names):
+def map_vertex_names(gt_graph, draw_options, node_names):
     """
     Map node names to vertices in a graph_tool graph.
 
@@ -29,15 +14,17 @@ def map_vertex_names(gt_graph, vertices, node_names):
         v_text_prop (graph_tool.VertexPropertyMap): Vertex property map with node names.
         gt_graph (graph_tool.Graph): Modified graph with vertex names.
     """
+    vertices = gt_graph.vertices()
     if node_names is None:
-        return None, vertices, gt_graph
+        return gt_graph, draw_options
     else: 
         v_text = gt_graph.new_vertex_property("string")
         for v, name in zip(vertices, node_names):
             v_text[v] = name
-        return v_text, vertices, gt_graph
-
-def map_vertex_color(gt_graph, vertices, node_colors, alpha=1.0):
+        draw_options['vertex_text'] = v_text
+        return gt_graph, draw_options
+    
+def map_vertex_color(gt_graph, draw_options, node_colors, alpha=1.0):
     """
     Map y values to vertex colors for a graph_tool graph.
 
@@ -49,9 +36,9 @@ def map_vertex_color(gt_graph, vertices, node_colors, alpha=1.0):
     Returns:
         v_color (graph_tool.VertexPropertyMap): Vertex property map with colors.
     """
-
+    vertices = gt_graph.vertices()
     if node_colors is None:
-        return None, vertices, gt_graph
+        return gt_graph, draw_options
     else: 
         y = list(np.array(node_colors))
         v_color = gt_graph.new_vertex_property("vector<double>")
@@ -92,10 +79,10 @@ def map_vertex_color(gt_graph, vertices, node_colors, alpha=1.0):
             for idx, value in enumerate(y):
                 rgb = y_to_color[int(value)]
                 v_color[vertices[idx]] = rgb
+        draw_options['vertex_fill_color'] = v_color
+        return gt_graph, draw_options
 
-        return v_color, vertices, gt_graph
-
-def map_vertex_size(gt_graph, vertices, node_sizes):
+def map_vertex_size(gt_graph, draw_options, node_sizes):
     """
     Map y values to vertex sizes for a graph_tool graph.
 
@@ -107,9 +94,9 @@ def map_vertex_size(gt_graph, vertices, node_sizes):
     Returns:
         v_size (graph_tool.VertexPropertyMap): Vertex property map with sizes.
     """
-
+    vertices = gt_graph.vertices()
     if node_sizes is None:
-        return None, vertices, gt_graph
+        return gt_graph, draw_options
     else: 
         y = list(np.array(node_sizes))
         v_size = gt_graph.new_vertex_property("double")
@@ -120,5 +107,5 @@ def map_vertex_size(gt_graph, vertices, node_sizes):
             normalized_value = (value - y_min) / (y_max - y_min)  # Normalize between [0, 1]
             size = min_size + normalized_value * (max_size - min_size)  # Map to size range
             v_size[vertices[idx]] = size
-
-        return v_size, vertices, gt_graph
+        draw_options['vertex_size'] = v_size  
+        return gt_graph, draw_options
