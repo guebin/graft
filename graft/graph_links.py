@@ -73,7 +73,9 @@ def map_edge_pen_widths(
 
     for idx, (start, end) in enumerate(links.t().tolist()):
         e = gt_graph.add_edge(vertices[start], vertices[end])
-        print((weights / weights.max())[idx].item()*edge_weight_width_scale)
+        a = (weights / weights.max())[idx].item()
+        b = edge_weight_width_scale
+        print(a,b,type(a),type(b))
         #print(weights)
         #e_pen_width[e] = (weights / weights.max())[idx].item() * edge_weight_width_scale
     draw_options['edge_pen_width'] = e_pen_width        
