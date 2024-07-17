@@ -1,5 +1,6 @@
 def map_edge_weight_text(
         gt_graph,
+        draw_options,
         edge_weight_text_format=".2f"
     ):
     """
@@ -32,10 +33,12 @@ def map_edge_weight_text(
     for idx, (start, end) in enumerate(links.t().tolist()):
         e = gt_graph.add_edge(vertices[start], vertices[end])
         e_weight_text[e] = format(weights[idx].item(), edge_weight_text_format)
-    return e_weight_text, gt_graph
+    draw_options['edge_text'] = e_weight_text
+    return gt_graph, draw_options
 
 def map_edge_pen_widths(
         gt_graph,
+        draw_options,
         edge_weight_width_scale=5
     ):
     """
@@ -67,4 +70,5 @@ def map_edge_pen_widths(
     for idx, (start, end) in enumerate(links.t().tolist()):
         e = gt_graph.add_edge(vertices[start], vertices[end])
         e_pen_width[e] = (weights / weights.max())[idx].item() * edge_weight_width_scale
-    return e_pen_width, gt_graph
+    draw_options['edge_pen_width'] = e_pen_width        
+    return gt_graph, draw_options
