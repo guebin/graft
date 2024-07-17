@@ -84,7 +84,7 @@ def map_vertex_color(gt_graph, vertices, node_colors):
             ggplot_colors_rgb = [hex_to_rgb_normalized(color) for color in ggplot_colors]
             unique_y = list(set(y))
             unique_y.sort()
-            y_to_color = {int(val): ggplot_colors_rgb[val] for val in enumerate(unique_y)}
+            y_to_color = {int(val): ggplot_colors_rgb[val] for val in unique_y}
             for idx, value in enumerate(y):
                 rgb = y_to_color[int(value)]
                 v_color[vertices[idx]] = rgb
