@@ -19,10 +19,6 @@ def setup_graph_draw(
         node_names (list, optional): List of node names. Default is None.
         node_colors (list, optional): List of node colors. Default is None.
         node_sizes (list, optional): List of node sizes. Default is None.
-        edge_weight_text (bool, optional): Whether to display edge weights as text. Default is True.
-        edge_weight_width (bool, optional): Whether to adjust edge widths based on weights. Default is True.
-        edge_weight_text_format (str, optional): Format string for edge weight text. Default is ".2f".
-        edge_weight_width_scale (float, optional): Scale factor for edge width based on weights. Default is 1.0.
         layout_options (dict, optional): Dictionary of layout options for the layout algorithm. Default is None.
         draw_options (dict, optional): Dictionary of drawing options for the graph drawing. Default is None.
 
@@ -149,10 +145,6 @@ def plot(
         node_names=None,
         node_colors=None,
         node_sizes=None,
-        edge_weight_text=True,
-        edge_weight_width=True,
-        edge_weight_text_format=".2f",
-        edge_weight_width_scale=1.0,
         layout_options=None,
         draw_options=None,
     ):
@@ -164,10 +156,6 @@ def plot(
         node_names (list, optional): List of node names. Default is None.
         node_colors (list, optional): List of node colors. Default is None.
         node_sizes (list, optional): List of node sizes. Default is None.
-        edge_weight_text (bool, optional): Whether to display edge weights as text. Default is True.
-        edge_weight_width (bool, optional): Whether to adjust edge widths based on weights. Default is True.
-        edge_weight_text_format (str, optional): Format string for edge weight text. Default is ".2f".
-        edge_weight_width_scale (float, optional): Scale factor for edge width based on weights. Default is 1.0.
         layout_options (dict, optional): Dictionary of layout options for the layout algorithm. Default is None.
         draw_options (dict, optional): Dictionary of drawing options for the graph drawing. Default is None.
 
@@ -179,10 +167,6 @@ def plot(
         node_names=node_names,
         node_colors=node_colors,
         node_sizes=node_sizes,
-        edge_weight_text=edge_weight_text,
-        edge_weight_width=edge_weight_width,
-        edge_weight_text_format=edge_weight_text_format,
-        edge_weight_width_scale=edge_weight_width_scale,
         layout_options=layout_options,
         draw_options=draw_options,
     )
