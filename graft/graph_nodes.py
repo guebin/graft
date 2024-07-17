@@ -54,7 +54,7 @@ def map_vertex_color(gt_graph, vertices, node_colors):
         return None, vertices, gt_graph
     else: 
         y = torch.tensor(node_colors)   
-        v_color = gt_graph.new_vertex_property("vector<double>")
+        v_color = gt_graph.new_vertex_property("double")
 
         # Continuous values or too many unique values
         if y.is_floating_point() or len(y.unique())>10:
