@@ -91,17 +91,14 @@ def setup_graph_draw(
         default_draw_options.update(draw_options)
     draw_options = default_draw_options
 
-    # Extract_graph_components.
-    links, weights, num_nodes  = extract_graph_components(graph)
-
     # 3. Create a graph_tool graph.
     if graph.is_undirected():
         gt_graph = gt.Graph(directed=False)
-        for _ in range(num_nodes):
+        for _ in range(graph.num_nodes):
             gt_graph.add_vertex() 
     else:
         gt_graph = gt.Graph(directed=True)    
-        for _ in range(num_nodes):
+        for _ in range(graph.num_nodes):
             gt_graph.add_vertex() 
 
     # 5. Map names, colors and sizes.

@@ -14,13 +14,12 @@ def map_vertex_names(gt_graph, draw_options, node_names):
         v_text_prop (graph_tool.VertexPropertyMap): Vertex property map with node names.
         gt_graph (graph_tool.Graph): Modified graph with vertex names.
     """
-    vertices = list(gt_graph.vertices())
     if node_names is None:
         return gt_graph, draw_options
     else: 
         v_text = gt_graph.new_vertex_property("string")
-        for v, name in zip(vertices, node_names):
-            v_text[v] = name
+        for idx,name in enumerate(node_names):
+            v_text[idx] = name
         draw_options['vertex_text'] = v_text
         return gt_graph, draw_options
     
@@ -36,7 +35,6 @@ def map_vertex_color(gt_graph, draw_options, node_colors, alpha=1.0):
     Returns:
         v_color (graph_tool.VertexPropertyMap): Vertex property map with colors.
     """
-    vertices = list(gt_graph.vertices())
     if node_colors is None:
         return gt_graph, draw_options
     else: 
@@ -94,7 +92,6 @@ def map_vertex_size(gt_graph, draw_options, node_sizes):
     Returns:
         v_size (graph_tool.VertexPropertyMap): Vertex property map with sizes.
     """
-    vertices = list(gt_graph.vertices())
     if node_sizes is None:
         return gt_graph, draw_options
     else: 
