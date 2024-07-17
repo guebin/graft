@@ -92,7 +92,7 @@ def map_vertex_color(gt_graph, vertices, node_colors):
 
         return vertices, v_color
 
-def map_vertex_size(gt_graph, vertices, node_size):
+def map_vertex_size(gt_graph, vertices, node_sizes):
     """
     Map y values to vertex sizes for a graph_tool graph.
 
@@ -105,10 +105,10 @@ def map_vertex_size(gt_graph, vertices, node_size):
         v_size (graph_tool.VertexPropertyMap): Vertex property map with sizes.
     """
 
-    if node_size is None:
+    if node_sizes is None:
         return None, gt_graph
     else: 
-        y = torch.tensor(node_size)
+        y = torch.tensor(node_sizes)
         v_size = gt_graph.new_vertex_property("double")
 
         y_min, y_max = y.min().item(), y.max().item()

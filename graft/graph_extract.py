@@ -27,8 +27,4 @@ def extract_graph_components(graph):
     # Extract number of nodes
     num_nodes = graph.num_nodes
 
-    # Extract node features (x) and labels/targets (y)
-    x = torch.tensor(graph.x) if (hasattr(graph, 'x') and graph.x is not None) else None
-    y = torch.tensor(graph.y) if (hasattr(graph, 'y') and graph.y is not None) else None
-
-    return links, weights, num_nodes, x, y
+    return links, weights, num_nodes

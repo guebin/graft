@@ -99,7 +99,7 @@ def plot(
     draw_options = default_draw_options
 
     # Extract_graph_components.
-    links, weights, num_nodes, x, y = extract_graph_components(graph)
+    links, weights, num_nodes  = extract_graph_components(graph)
 
     # 3. Create a graph_tool graph.
     if graph.is_undirected():
