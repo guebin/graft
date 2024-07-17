@@ -107,13 +107,13 @@ def map_vertex_size(gt_graph, vertices, node_sizes):
     if node_sizes is None:
         return None, vertices, gt_graph
     else: 
-        y = torch.tensor(node_sizes)
+        y = list(node_sizes)
         v_size = gt_graph.new_vertex_property("double")
 
-        y_min, y_max = y.min().item(), y.max().item()
+        y_min, y_max = min(y), max(y)
         min_size, max_size = 10, 50  # Define the range of vertex sizes
         for idx, value in enumerate(y):
-            normalized_value = (value.item() - y_min) / (y_max - y_min)  # Normalize between [0, 1]
+            normalized_value = (value - y_min) / (y_max - y_min)  # Normalize between [0, 1]
             size = min_size + normalized_value * (max_size - min_size)  # Map to size range
             v_size[vertices[idx]] = size
 
