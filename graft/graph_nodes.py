@@ -16,7 +16,7 @@ def set_nodes(gt_graph, num_nodes):
     vertices = [gt_graph.add_vertex() for _ in range(num_nodes)]
     return vertices
 
-def map_vertex_names(gt_graph, vertices, node_names):
+def map_vertex_names(vertices, node_names):
     """
     Map node names to vertices in a graph_tool graph.
 
@@ -37,7 +37,7 @@ def map_vertex_names(gt_graph, vertices, node_names):
             v_text[v] = name
         return vertice, v_text 
 
-def map_vertex_color(gt_graph, vertices, node_colors):
+def map_vertex_color(vertices, node_colors):
     """
     Map y values to vertex colors for a graph_tool graph.
 
@@ -92,7 +92,7 @@ def map_vertex_color(gt_graph, vertices, node_colors):
 
         return vertices, v_color
 
-def map_vertex_size(gt_graph, vertices, node_sizes):
+def map_vertex_size(vertices, node_sizes):
     """
     Map y values to vertex sizes for a graph_tool graph.
 
